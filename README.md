@@ -51,3 +51,8 @@ Project Explorer
   </pre>
 </details>
 //======================================================================
+
+舉例:<BR>
+UI介面new ConsumerServiceImpl().addConsumer(consumer )<BR>
+=====><BR>
+ConsumerServiceImpl
