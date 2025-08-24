@@ -60,13 +60,10 @@ Project Explorer
 
 當使用者在介面輸入資料並點擊註冊按鈕後，程式會先檢查使用者名稱是否已存在。如果不存在，則將新使用者的資料存入資料庫；如果已存在，則顯示錯誤訊息。
 
-程式碼區塊
-1. 註冊按鈕 (GUI)
+### 註冊按鈕 (GUI)
+
 這段程式碼處理使用者在介面上的操作，取得輸入資料，並呼叫後端服務。
-
-Java
-
-//=================================================按鈕
+```java
 JButton btnNewButton = new JButton("註冊");
 btnNewButton.addMouseListener(new MouseAdapter() {
     @Override
@@ -74,24 +71,13 @@ btnNewButton.addMouseListener(new MouseAdapter() {
         String Name = name.getText();
         String UserName = username.getText();
         String Password = password.getText();
-        String Address = address.getText();
-        String Phone = phone.getText();
-        String Email = email.getText();
-        String Nationality = nationality.getText();
-        String Gender = gender.getText();
-        String BloodType = bloodType.getText();
-        String ZodiacSign = zodiacSign.getText();
-        String Job = job.getText();
-        Integer Age = Integer.parseInt(age.getText());
-        Integer Height = Integer.parseInt(height.getText());
-        Integer Weight = Integer.parseInt(weight.getText());
+        // ... (省略部分程式碼)
         
         Consumer consumer = new Consumer(
             Name, UserName, Password, Address, Phone, Email,
             Nationality, Gender, BloodType, ZodiacSign, Job,
             Age, Height, Weight, "", false, false);
         
-        // 呼叫服務層檢查並新增使用者
         if (new ConsumerServiceImpl().addConsumer(consumer)) {
             AddSuccess addConsumerSuccess = new AddSuccess();
             addConsumerSuccess.setVisible(true);
@@ -103,4 +89,3 @@ btnNewButton.addMouseListener(new MouseAdapter() {
 });
 btnNewButton.setBounds(553, 336, 149, 85);
 contentPane.add(btnNewButton);
-//====================================================按鈕
