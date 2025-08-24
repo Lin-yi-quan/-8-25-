@@ -89,3 +89,65 @@ btnNewButton.addMouseListener(new MouseAdapter() {
 });
 btnNewButton.setBounds(553, 336, 149, 85);
 contentPane.add(btnNewButton);
+
+
+<BR>
+
+抱歉，我的疏忽。您提供的圖片顯示，您的程式碼之所以會黏在一起，是因為您在 Markdown 語法中的分隔符號不正確。
+
+在 README.md 檔案裡，若要讓程式碼區塊獨立顯示，不能用雙斜線 // 或等號 ===== 來分隔。您必須使用三個反引號 ````，並且在區塊前後都加上。
+
+如何修復
+請將您的 Markdown 檔案內容，按照下面的正確格式來修改。這樣在 GitHub 上顯示時，每個程式碼區塊就會有獨立的灰色背景，並且不會黏在一起。
+
+Markdown
+
+### 註冊按鈕 (GUI)
+
+這段程式碼處理使用者在介面上的操作，取得輸入資料，並呼叫後端服務。
+```java
+JButton btnNewButton = new JButton("註冊");
+btnNewButton.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        String Name = name.getText();
+        String UserName = username.getText();
+        String Password = password.getText();
+        // ... (省略部分程式碼)
+        
+        Consumer consumer = new Consumer(
+            Name, UserName, Password, Address, Phone, Email,
+            Nationality, Gender, BloodType, ZodiacSign, Job,
+            Age, Height, Weight, "", false, false);
+        
+        if (new ConsumerServiceImpl().addConsumer(consumer)) {
+            AddSuccess addConsumerSuccess = new AddSuccess();
+            addConsumerSuccess.setVisible(true);
+            dispose();
+        } else {
+            errorMessage.setText("帳號已經被註冊了");
+        }
+    }
+});
+btnNewButton.setBounds(553, 336, 149, 85);
+contentPane.add(btnNewButton);
+服務層 (Service)
+這段程式碼是業務邏輯的核心，負責在新增使用者前檢查帳號是否重複。
+
+Java
+
+@Override
+public boolean addConsumer(Consumer consumer) {
+    boolean isUsernameBeenUse = false;
+    
+    // 呼叫 DAO 層的 read 方法，查詢帳號是否已存在
+    Consumer c = consumerDaoImpl.read(consumer.getUsername());
+    
+    // 如果帳號不存在 (c == null)，則執行新增
+    if (c == null) {
+        consumerDaoImpl.add(consumer);
+        isUsernameBeenUse = true;
+    }
+    
+    return isUsernameBeenUse;
+}
