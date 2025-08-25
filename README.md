@@ -134,52 +134,34 @@ contentPane.add(btnNewButton);
 <BR>
 <BR>
 <BR>
-2. 服務層 (Service)
-這段程式碼是業務邏輯的核心，負責在新增使用者前檢查帳號是否重複。
-<BR>
-//==================================================================
+
+
+2️⃣ 服務層 (Service 層)
+
+功能：負責業務邏輯，例如帳號檢查，決定是否新增使用者。
+
+程式碼：
+
 @Override
 public boolean addConsumer(Consumer consumer) {
     boolean isUsernameBeenUse = false;
-    
-    // 呼叫 DAO 層的 read 方法，查詢帳號是否已存在
+
+    // 呼叫 DAO 層查詢帳號是否存在
     Consumer c = consumerDaoImpl.read(consumer.getUsername());
-    
-    // 如果帳號不存在 (c == null)，則執行新增
+
     if (c == null) {
-        consumerDaoImpl.add(consumer);
+        consumerDaoImpl.add(consumer); // 帳號不存在才新增
         isUsernameBeenUse = true;
     }
-    
+
     return isUsernameBeenUse;
 }
-//==================================================================
-//==================================================================
-@Override
-public boolean addConsumer(Consumer consumer) {
-    boolean isUsernameBeenUse = false;
-    
-    // 呼叫 DAO 層的 read 方法，查詢帳號是否已存在
-    Consumer c = consumerDaoImpl.read(consumer.getUsername());
-    
-    // 如果帳號不存在 (c == null)，則執行新增
-    if (c == null) {
-        consumerDaoImpl.add(consumer);
-        isUsernameBeenUse = true;
-    }
-    
-    return isUsernameBeenUse;
-}
-//==================================================================
 
-<BR>
 
-3. 資料庫操作層 (DAO)
-這兩段程式碼直接與資料庫互動，執行新增 (add) 和讀取 (read) 操作。
-<BR>
-<BR>
-<BR>
-//============================================================
+3️⃣ 資料庫操作層 (DAO 層)
+
+功能：直接操作資料庫，提供新增 (add) 與查詢 (read) 方法。
+
 @Override
 public void add(Consumer consumer) {
     String sql = "insert into consumer(name,username,password,address,phone,email,nationality,gender,"
@@ -208,9 +190,8 @@ public void add(Consumer consumer) {
         e.printStackTrace();
     }
 }
-//============================================================
-//============================================================
-//============================================================
+
+
 @Override
 public Consumer read(String username) {
     Consumer consumer = null;
@@ -233,4 +214,26 @@ public Consumer read(String username) {
     
     return consumer;
 }
-//============================================================
+
+
+4️⃣ 流程圖 (文字版)
+
+[使用者輸入表單]
+          ↓
+        [UI 層]
+          ↓ 呼叫
+      [Service 層]
+      ┌─────────────┐
+      │ 檢查帳號是否存在 │
+      └─────────────┘
+          ↓
+      [DAO 層]
+  ┌───────────────┐
+  │ 查詢或新增資料庫 │
+  └───────────────┘
+          ↑
+      回傳結果給 Service
+          ↑
+      Service 判斷成功/失敗
+          ↑
+      UI 顯示訊息給使用者
