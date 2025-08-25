@@ -80,7 +80,18 @@ DAO (資料庫操作層)：負責與資料庫進行互動，執行新增和查�
 1. 註冊按鈕 (UI 層)
 這段程式碼處理使用者點擊「註冊」按鈕的事件，從介面取得所有輸入資料，並呼叫後端服務。
 
-//=================================================按鈕
+# 註冊使用者系統說明
+
+本作業展示了一個典型的 **三層架構 (UI → Service → DAO/Database)** 的使用者註冊系統，包含 **介面層、服務層、資料庫操作層**。主要功能是註冊使用者並檢查帳號是否重複。
+
+---
+
+## 1️⃣ UI 層 (介面層)
+
+- **功能**：處理使用者操作，收集表單資料，呼叫服務層新增使用者。
+- **程式碼**：
+
+```java
 JButton btnNewButton = new JButton("註冊");
 btnNewButton.addMouseListener(new MouseAdapter() {
     @Override
@@ -103,7 +114,8 @@ btnNewButton.addMouseListener(new MouseAdapter() {
         Consumer consumer = new Consumer(
             Name, UserName, Password, Address, Phone, Email,
             Nationality, Gender, BloodType, ZodiacSign, Job,
-            Age, Height, Weight, "", false, false);
+            Age, Height, Weight, "", false, false
+        );
         
         // 呼叫服務層檢查並新增使用者
         if (new ConsumerServiceImpl().addConsumer(consumer)) {
@@ -117,7 +129,7 @@ btnNewButton.addMouseListener(new MouseAdapter() {
 });
 btnNewButton.setBounds(553, 336, 149, 85);
 contentPane.add(btnNewButton);
-//====================================================按鈕
+
 
 <BR>
 <BR>
