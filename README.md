@@ -71,6 +71,12 @@ Service (服務層)：處理業務邏輯，例如檢查帳號是否重複。
 DAO (資料庫操作層)：負責與資料庫進行互動，執行新增和查詢。
 
 程式碼區塊
+
+<BR>
+<BR>
+<BR>
+
+
 1. 註冊按鈕 (UI 層)
 這段程式碼處理使用者點擊「註冊」按鈕的事件，從介面取得所有輸入資料，並呼叫後端服務。
 
@@ -113,7 +119,8 @@ btnNewButton.setBounds(553, 336, 149, 85);
 contentPane.add(btnNewButton);
 //====================================================按鈕
 
-
+<BR>
+<BR>
 <BR>
 2. 服務層 (Service)
 這段程式碼是業務邏輯的核心，負責在新增使用者前檢查帳號是否重複。
@@ -135,9 +142,6 @@ public boolean addConsumer(Consumer consumer) {
     return isUsernameBeenUse;
 }
 //==================================================================
-
-<BR>
-
 //==================================================================
 @Override
 public boolean addConsumer(Consumer consumer) {
@@ -160,9 +164,9 @@ public boolean addConsumer(Consumer consumer) {
 
 3. 資料庫操作層 (DAO)
 這兩段程式碼直接與資料庫互動，執行新增 (add) 和讀取 (read) 操作。
-
 <BR>
-
+<BR>
+<BR>
 //============================================================
 @Override
 public void add(Consumer consumer) {
@@ -193,7 +197,8 @@ public void add(Consumer consumer) {
     }
 }
 //============================================================
-
+//============================================================
+//============================================================
 @Override
 public Consumer read(String username) {
     Consumer consumer = null;
